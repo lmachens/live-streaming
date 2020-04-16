@@ -26,7 +26,7 @@ function Player({ videoSrc }) {
 
   return (
     <div>
-      <Video controls muted src={videoSrc} ref={videoRef} />
+      <Video controls muted ref={videoRef} />
     </div>
   );
 }
