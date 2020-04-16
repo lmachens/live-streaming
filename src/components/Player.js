@@ -8,7 +8,12 @@ const Video = styled.video`
   max-width: 100%;
 `;
 
-function Player({ animatedGIFSrc, thumbnailSrc, videoSrc }) {
+const DownloadLink = styled.a`
+  display: block;
+  color: lightblue;
+`;
+
+function Player({ animatedGIFSrc, mp4file, thumbnailSrc, videoSrc }) {
   const videoRef = useRef(null);
 
   useEffect(() => {
@@ -28,12 +33,14 @@ function Player({ animatedGIFSrc, thumbnailSrc, videoSrc }) {
     <div>
       <img src={animatedGIFSrc} />
       <Video controls muted poster={thumbnailSrc} ref={videoRef} />
+      {mp4file && <DownloadLink href={mp4file}>Download</DownloadLink>}
     </div>
   );
 }
 
 Player.propTypes = {
   animatedGIFSrc: PropTypes.string,
+  mp4file: PropTypes.string,
   thumbnailSrc: PropTypes.string,
   videoSrc: PropTypes.string,
 };
