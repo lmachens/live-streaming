@@ -1,17 +1,29 @@
 import React from "react";
 import "./App.css";
-import Player from "./components/Player";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import LiveStream from "./pages/LiveStream";
+import Recordings from "./pages/Recordings";
+import Navigation from "./components/Navigation";
 
 function App() {
   return (
-    <div className="App">
-      <header>
-        <h1>Live streaming example with Mux</h1>
-      </header>
-      <main>
-        <Player videoSrc="https://stream.mux.com/MQkWT2aOEELR6gzLtYzp9m8vy1cb4ATTNRAsSwGw1Hw.m3u8" />
-      </main>
-    </div>
+    <Router>
+      <div className="App">
+        <header>
+          <Navigation />
+        </header>
+        <main>
+          <Switch>
+            <Route path="/recordings">
+              <Recordings />
+            </Route>
+            <Route path="/">
+              <LiveStream />
+            </Route>
+          </Switch>
+        </main>
+      </div>
+    </Router>
   );
 }
 
