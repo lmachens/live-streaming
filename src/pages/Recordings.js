@@ -1,31 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Player from "../components/Player";
 
-const recordings = [
-  {
-    playbackId: "yaKDfIi68j01HD660100CF9o02l1Dklp3tDl2OnoSSNPj9M",
-    thumbnailTime: 5,
-    mp4file: "https://storage.googleapis.com/muxdemofiles/mux-video-intro.mp4",
-  },
-  {
-    playbackId: "k7HXQJHiJVD3bIT8uF7iBnJeuIOBF4UH28ihnU8SIMo",
-    thumbnailTime: 10,
-  },
-];
+const recordingsAPI = `https://api.mux.com/video/v1/assets`;
 
 function Recordings() {
+  const [recordings, setRecordings] = useState(null);
+
+  useEffect(() => {
+    fetch(recordingsAPI, {
+      headers: {
+        Authorization: `Basic ${btoa(
+          process.env.REACT_APP_API_USER + ":" + process.env.REACT_APP_API_KEY
+        )}`,
+      },
+    })
+      .then((response) => response.json())
+      .then(setRecordings);
+  }, []);
+
   return (
     <>
-      <h1>Recordings</h1>
-      {recordings.map((recording) => (
-        <Player
-          key={recording.playbackId}
-          mp4file={recording.mp4file}
-          thumbnailSrc={`https://image.mux.com/${recording.playbackId}/thumbnail.jpg?time=${recording.thumbnailTime}`}
-          animatedGIFSrc={`https://image.mux.com/${recording.playbackId}/animated.gif`}
-          videoSrc={`https://stream.mux.com/${recording.playbackId}.m3u8`}
-        />
-      ))}
+      <div>Recordings</div>
+      {!recordings && <div>Loading...</div>}
+      {recordings?.data.map((recording) => {
+        const playbackId = recording.playback_ids[0].id;
+        return (
+          <Player
+            key={playbackId}
+            mp4file={null}
+            thumbnailSrc={`https://image.mux.com/${playbackId}/thumbnail.jpg?time=15`}
+            animatedGIFSrc={`https://image.mux.com/${playbackId}/animated.gif`}
+            videoSrc={`https://stream.mux.com/${playbackId}.m3u8`}
+          />
+        );
+      })}
     </>
   );
 }
