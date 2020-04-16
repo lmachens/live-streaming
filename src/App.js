@@ -9,7 +9,7 @@ function App() {
         <h1>Live streaming example with Mux</h1>
       </header>
       <main>
-        <Player />
+        <Player videoSrc="https://stream.mux.com/V6Q01yPN00QqsGGLtij6M00R5iOvSYC9Nfx.m3u8" />
       </main>
     </div>
   );
