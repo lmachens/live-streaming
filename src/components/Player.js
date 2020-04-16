@@ -8,7 +8,7 @@ const Video = styled.video`
   max-width: 100%;
 `;
 
-function Player({ thumbnailSrc, videoSrc }) {
+function Player({ animatedGIFSrc, thumbnailSrc, videoSrc }) {
   const videoRef = useRef(null);
 
   useEffect(() => {
@@ -26,14 +26,16 @@ function Player({ thumbnailSrc, videoSrc }) {
 
   return (
     <div>
+      <img src={animatedGIFSrc} />
       <Video controls muted poster={thumbnailSrc} ref={videoRef} />
     </div>
   );
 }
 
 Player.propTypes = {
-  videoSrc: PropTypes.string,
+  animatedGIFSrc: PropTypes.string,
   thumbnailSrc: PropTypes.string,
+  videoSrc: PropTypes.string,
 };
 
 export default Player;

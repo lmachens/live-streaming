@@ -20,6 +20,7 @@ function Recordings() {
         <Player
           key={recording.playbackId}
           thumbnailSrc={`https://image.mux.com/${recording.playbackId}/thumbnail.jpg?time=${recording.thumbnailTime}`}
+          animatedGIFSrc={`https://image.mux.com/${recording.playbackId}/animated.gif`}
           videoSrc={`https://stream.mux.com/${recording.playbackId}.m3u8`}
         />
       ))}
