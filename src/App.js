@@ -4,14 +4,23 @@ import LiveStream from "./pages/LiveStream";
 import Recordings from "./pages/Recordings";
 import Navigation from "./components/Navigation";
 import GlobalStyles from "./GlobalStyles";
+import Logo from "./components/Logo";
+import styled from "@emotion/styled";
+
+const Header = styled.header`
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+`;
 
 function App() {
   return (
     <Router>
       <GlobalStyles />
-      <header>
+      <Header>
+        <Logo />
         <Navigation />
-      </header>
+      </Header>
       <main>
         <Switch>
           <Route path="/recordings">
